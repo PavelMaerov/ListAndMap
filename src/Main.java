@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        List<Integer> nums = new ArrayList<>(List.of(1, 1, 2, 3, 4, 4, 5, 5, 6, 7));
+        List<Integer> nums = new ArrayList<>(List.of(7,6,1,1,2,3,4,4,5,5,6,7));
         System.out.println("Задача 1");
         task1(nums);
         System.out.println("Задача 2");
@@ -28,17 +28,12 @@ public class Main {
 
     //Напишите код, с помощью которого можно напечатать только четные числа без повторений в порядке возрастания.
     public static void task2(List<Integer> nums) {
-        Set<Integer> set = new HashSet<>();
-        for (Integer num : nums) {
-            if (num % 2 == 0) {                 //только четные числа
-                set.add(num);                   //без повторений
+        Set<Integer> set = new TreeSet<>(nums);  //уже упорядочено по возрастанию
+        for (Integer num : set) {
+            if (num % 2 == 0) {
+                System.out.print(num + " ");
             }
         }
-        List<Integer> list = new ArrayList<>(set);
-        Collections.sort(list);                 //в порядке возрастания
-        for (Integer num : list) {
-                System.out.print(num + " ");    //напечатать
-            }
         System.out.println();
     }
 
@@ -60,8 +55,8 @@ public class Main {
             if (repetitionNumber == null) repetitionNumber = 0;
             map.put(word, repetitionNumber + 1);        //записываем увеличенное количество повторений
         }
-        for (Map.Entry entry : map.entrySet()) {
-            if ((int)entry.getValue() > 1) {
+        for (Map.Entry<String,Integer> entry : map.entrySet()) {
+            if (entry.getValue() > 1) {
                 System.out.println("cлово: "+ entry.getKey()+", повторений: "+entry.getValue());
             }
         }
